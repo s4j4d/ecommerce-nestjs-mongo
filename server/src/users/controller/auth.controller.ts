@@ -25,7 +25,7 @@ export class AuthController {
   constructor(
     private authService: AuthService,
     private usersService: UsersService
-  ) {}
+  ) { }
 
   @UseGuards(LocalAuthGuard)
   @Post('login')
@@ -94,5 +94,10 @@ export class AuthController {
     session.user = updatedUser;
 
     return updatedUser;
+  }
+
+  @Post('/otp')
+  otp(@Body() data: OtpDto) {
+
   }
 }

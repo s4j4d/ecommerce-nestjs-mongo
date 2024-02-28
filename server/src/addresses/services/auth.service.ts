@@ -7,25 +7,13 @@ import { UsersService } from './users.service';
 import * as bcrypt from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
 import { encryptPassword } from 'src/utils';
-import { Redis } from 'ioredis'
-import { OtpDto } from '../dtos';
-import * as https from 'node:https'
 
 @Injectable()
 export class AuthService {
-  public readonly redis;
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService
-  ) {
-    this.redis = new Redis({
-      port: 6379, // Redis port
-      host: "127.0.0.1", // Redis host
-      username: "default", // needs Redis >= 6
-      password: "my-top-secret",
-      db: 0, // Defaults to 0
-    });
-  }
+  ) {}
 
   async validateUser(email: string, password: string) {
     const user = await this.usersService.findOne(email);
@@ -54,41 +42,6 @@ export class AuthService {
     if (existingUser) throw new BadRequestException('Email is already in use.');
 
     const encryptedPassword = await encryptPassword(password);
-
-    const user = await this.usersService.create({
-      email,
-      password: encryptedPassword,
-      isAdmin: false,
-      name,
-    });
-
-    return user;
-  }
-
-  async sendOtp(data: OtpDto) {
-
-    await this.redis.set(`otp_${data.userNumber}`)
-
-    await new Promise((resolve, reject) => {
-      https.request({
-        host: '192.168.1.1',
-        port: 443,
-        path: '/',
-        method: 'GET',
-        rejectUnauthorized: false, // This option disables TLS certificate validation
-        requestCert: true,
-        agent: false,
-      }(res)=> {
-        const body = [];
-        res.on('data', function (data) {
-          body.push(data);
-        });
-        res.on('end', function () {
-          console.log(body.join(''));
-        });
-      });
-    })
-
 
     const user = await this.usersService.create({
       email,

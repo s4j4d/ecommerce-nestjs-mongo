@@ -15,6 +15,4 @@ export class UserDto {
   @Expose()
   isAdmin: boolean;
 
-  @Expose()
-  accessToken?: string;
 }

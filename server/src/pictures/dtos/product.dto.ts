@@ -1,5 +1,4 @@
-import { IsString, IsNumber, IsDate } from 'class-validator';
-import {Type} from 'class-transformer'
+import { IsString, IsNumber } from 'class-validator';
 
 export class ProductDto {
   @IsString()
@@ -22,8 +21,4 @@ export class ProductDto {
 
   @IsNumber()
   countInStock: number;
-
-  @IsDate()
-  @Type(()=>Date)
-  createDate:Date
 }
