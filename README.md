@@ -91,8 +91,6 @@ yarn dev
 ```
 
 ## Deployment 🚀
- - Client deployed on [Vercel](https://vercel.com/)
- - Server deployed on [Railway](https://railway.app/)
  
  
 ## Inspiration & credits ☄️
