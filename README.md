@@ -2,22 +2,15 @@
 
 ![Elecshop preview image](./client/public/design/preview.png)
 
-## The Challenge ⚡️
+## The Challenges ⚡️
 
-I wanted to build another eCommerce website using newer technologies than my [previous eCommerce project](https://github.com/NightClover-code/basic-eCommerce-website), where I used `Firebase` to store data and `Redux` for state management.
+This is a project that i have copied from the (https://github.com/NightClover-code) and i'm trying trying to add more functionalities and capabilities and then publish it on a host.
 
-I went with a `client-server` approach, and this time I mixed two frameworks for the first time, which were `Next.js` and `Nest.js`.
-
-This project was very fun to build, as I encountred multiple challenges on how to coordinate between a fast, secure, and strictly-typed Nest.js API; and a Next.js app based on client-side fetching.
-
-Here was the challenge:
-
-- Server-side full-featured shopping cart from scratch.
-- Storing product reviews and ratings for every customer.
-- Adding pagination & searching features for products.
-- User account management & saving product orders.
-- Admin profile & product management.
-- Fast checkout process (shipping, payment method, etc).
+some of the challenges are :
+- using a sms provider for otp authentication
+- using redis for caching the otp codes
+- adding a payment interface
+- dockerizing the project
 
 ## Built With ✨
 
@@ -34,7 +27,7 @@ Here was the challenge:
 Clone the project
 
 ```bash
-git clone https://github.com/NightClover-code/modern-ecommerce.git
+git clone https://github.com/s4j4d/ecommerce-nestjs-mongo
 ```
 
 Go to the project directory
@@ -98,16 +91,13 @@ yarn dev
 ```
 
 ## Deployment 🚀
- - Client deployed on [Vercel](https://vercel.com/)
- - Server deployed on [Railway](https://railway.app/)
  
  
 ## Inspiration & credits ☄️
- - [@bradtraversy](https://www.youtube.com/@TraversyMedia) - Project Idea
- - [@satnaing](https://github.com/satnaing) - README format
+ - [@achrafdev](https://achrafdev.com)
 
 ## Author
-- [@achrafdev](https://achrafdev.com)
+- [@s4j4d]
 
 **Thanks for sharing** 🚀
 
