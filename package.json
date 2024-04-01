@@ -4,16 +4,39 @@
   "main": "index.js",
   "repository": "https://github.com/NightClover-code/mern-ecommerce",
   "scripts": {
-    "start:server": "npm run start:dev --prefix server",
-    "start:client": "npm run dev --prefix client",
-    "start": "concurrently npm:start:*"
+    "prebuild": "rimraf dist",
+    "seed": "ts-node -r tsconfig-paths/register src/cli.ts",
+    "build": "nest build",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "start": "cross-env NODE_ENV=development nest start",
+    "start:dev": "cross-env NODE_ENV=development nest start --watch",
+    "start:debug": "cross-env NODE_ENV=development nest start --debug --watch",
+    "start:prod": "node dist/main",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "jest --config ./test/jest-e2e.json"
   },
-  "author": "Achraf Elmouhib <elmouhib2003achraf@gmail.com>",
+  "author": "sajad masjoodi <mmmsms97@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "concurrently": "^7.0.0"
+    "@nestjs/testing": "^10.3.5",
+    "@types/jest": "^29.5.12",
+    "@typescript-eslint/eslint-plugin": "^7.3.1",
+    "@typescript-eslint/parser": "^7.3.1",
+    "concurrently": "^7.0.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.57.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-prettier": "^5.1.3",
+    "husky": "^9.0.11",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.2"
   },
   "dependencies": {
+    "@nestjs/cli": "^10.3.2",
     "ioredis": "^5.3.2"
   }
 }

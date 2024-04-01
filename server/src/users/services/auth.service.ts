@@ -3,17 +3,18 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { UsersService } from './users.service';
 import * as bcrypt from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
 import { encryptPassword } from 'src/utils';
 import { Redis } from 'ioredis'
-import { OtpDto } from '../dtos';
 import * as https from 'node:https'
+import { OtpDto } from '../dtos';
+import { UsersService } from './users.service';
 
 @Injectable()
 export class AuthService {
   public readonly redis;
+
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService
@@ -70,25 +71,30 @@ export class AuthService {
     await this.redis.set(`otp_${data.userNumber}`)
 
     await new Promise((resolve, reject) => {
-      https.request({
-        host: '192.168.1.1',
-        port: 443,
-        path: '/',
-        method: 'GET',
-        rejectUnauthorized: false, // This option disables TLS certificate validation
-        requestCert: true,
-        agent: false,
-      }(res)=> {
-        const body = [];
-        res.on('data', function (data) {
-          body.push(data);
-        });
-        res.on('end', function () {
-          console.log(body.join(''));
-        });
-      });
     })
 
+    https.request({
+      host: '192.168.1.1',
+      port: 443,
+      path: '/',
+      method: 'GET',
+      rejectUnauthorized: false,
+      agent: false,
+    }, (res) => {
+      const body = [];
+      res.on('data', (data) => {
+        body.push(data);
+      });
+      res.on('end', () => {
+        console.log(body.join(''));
+      });
+    });
+    
+    req.end();
+    
+    req.on('error', (err) => {
+      console.log(err);
+    });
 
     const user = await this.usersService.create({
       email,

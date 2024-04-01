@@ -3,19 +3,17 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from 'src/strategies/jwt.strategy';
-import { AuthController } from './controller/auth.controller';
-import { User, UserSchema } from './schemas/user.schema';
-import { UsersService } from './services/users.service';
-import { AuthService } from './services/auth.service';
+import { Address, AddressSchema } from './schemas/addresses.schema';
+import { AddresssService } from './services/addresses.service';
 import { LocalStrategy } from '../strategies/local.strategy';
-import { UsersController } from './controller/users.controller';
+import { AddresssController } from './controller/addresses.controller';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       {
-        name: User.name,
-        schema: UserSchema,
+        name: Address.name,
+        schema: AddressSchema,
       },
     ]),
     PassportModule,
@@ -24,7 +22,7 @@ import { UsersController } from './controller/users.controller';
       signOptions: { expiresIn: '1d' },
     }),
   ],
-  controllers: [AuthController, UsersController],
-  providers: [UsersService, AuthService, LocalStrategy, JwtStrategy],
+  controllers: [ AddresssController],
+  providers: [AddresssService, LocalStrategy, JwtStrategy],
 })
-export class UsersModule {}
+export class AddressesModule { }

@@ -1,0 +1,22 @@
+version: 1
+
+services:
+  mongodb:
+    image: mongodb:latest
+    version:
+    volumes: 
+    - mongodb-v:/app/data
+    ports:
+    - 27017:27017
+  redis:
+    image: 
+    version:
+    volumes: 
+    - redis-v:/app/data
+    ports:
+    - 6379:6379
+  volumes:
+   - mongodb-v:
+   - redis-v:
+  networks:
+    - ecoomerce-network:

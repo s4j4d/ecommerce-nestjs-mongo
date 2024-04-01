@@ -14,7 +14,7 @@ import { OrdersService } from '../services/orders.service';
 
 @Controller('orders')
 export class OrdersController {
-  constructor(private ordersService: OrdersService) {}
+  constructor(private ordersService: OrdersService) { }
 
   @UseGuards(AuthGuard)
   @Post()
@@ -31,12 +31,13 @@ export class OrdersController {
   @UseGuards(AuthGuard)
   @Get('myorders')
   async getUserOrders(@Session() session: any) {
-    return this.ordersService.findUserOrders(session.user._id);
+    return this.ordersService.findUserOrders(session.user._id)      ;
+    
   }
 
   @UseGuards(AuthGuard)
   @Get(':id')
-  async getOrder(@Param('id') id: string) {
+  async getOrder(@Param('id') id: string){
     return this.ordersService.findById(id);
   }
 

@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
+import { CommandModule } from 'nestjs-command';
+import { UsersModule } from '../users/users.module';
+import { CartModule } from '../cart/cart.module';
+import { AddressesModule } from '../addresses/addresses.module';
 import { connectDB } from '../utils/config';
 import { ProductsModule } from '../products/products.module';
-import { UsersModule } from 'src/users/users.module';
-import { CommandModule } from 'nestjs-command';
-import { CartModule } from 'src/cart/cart.module';
 import { OrderModule } from '../orders/order.module';
 // import { SeedsModule } from '../seeds/seeds.module';
 import { AppController } from './controllers/app.controller';
@@ -16,11 +17,15 @@ import { AppService } from './services/app.service';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: ['.env'],
+      envFilePath: ['.env'], 
     }),
     MongooseModule.forRootAsync({
       inject: [ConfigService],
-      useFactory: connectDB,
+      useFactory: connectDB(
+        configService.get<string>('MONGODB_PASSWORD'||'1234'),
+        ConfigService.get<string>('MONGODB_URL'||'mongodb'),
+        configService.get<string>('MONGODB_DATABASE_NAME'||'ecommerce')
+      )
     }),
     CommandModule,
     ProductsModule,
@@ -28,9 +33,11 @@ import { AppService } from './services/app.service';
     CartModule,
     OrderModule,
     CloudinaryModule,
-    // SeedsModule,
+    AddressesModule,
+    PicturesModule,
+    
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export default class AppModule {}

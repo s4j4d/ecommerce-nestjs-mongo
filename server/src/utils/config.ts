@@ -4,12 +4,12 @@ import { MongooseModuleOptions } from '@nestjs/mongoose';
 import { SessionOptions } from 'express-session';
 
 export const connectDB = (
-  configService: ConfigService
+  dbPassword:string , 
+  dbUrl:string,
+  dbName:string
 ): MongooseModuleOptions => {
-  const dbPassword = configService.get<string>('MONGODB_PASSWORD');
-  const dbName = configService.get<string>('MONGODB_DATABASE_NAME');
 
-  const mongodbUri = `mongodb+srv://achrafdev:${dbPassword}@proshop.rbkt6.mongodb.net/${dbName}?retryWrites=true&w=majority`;
+  const mongodbUri = `mongodb+srv://sajad:${dbPassword}@${dbUrl}/${dbName}?retryWrites=true&w=majority`;
 
   return {
     uri: mongodbUri,

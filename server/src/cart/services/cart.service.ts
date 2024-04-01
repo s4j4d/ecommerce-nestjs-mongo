@@ -43,18 +43,18 @@ export class CartService {
         );
 
         return cartItem;
-      } else {
+      } 
         this.cart.cartItems.push(cartItem);
 
         return cartItem;
-      }
-    } else {
+      
+    } 
       const cartItem = this.cart.cartItems.find(x => x.productId === productId);
 
       cartItem.qty = qty;
 
       return cartItem;
-    }
+    
   }
 
   saveShippingDetails(shippingDetails: ShippingDetails): ShippingDetails {

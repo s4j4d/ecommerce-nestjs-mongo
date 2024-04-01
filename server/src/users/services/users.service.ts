@@ -4,9 +4,9 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { User, UserDocument } from '../schemas/user.schema';
 import { Model, Types } from 'mongoose';
 import { encryptPassword } from 'src/utils';
+import { User, UserDocument } from '../schemas/user.schema';
 
 @Injectable()
 export class UsersService {

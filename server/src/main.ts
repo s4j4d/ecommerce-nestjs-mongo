@@ -1,10 +1,10 @@
 import 'dotenv/config';
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app/app.module';
 import { ValidationPipe } from '@nestjs/common';
 import * as session from 'express-session';
-import { corsConfig, sessionConfig } from './utils/config';
 import { NestExpressApplication } from '@nestjs/platform-express';
+import { corsConfig, sessionConfig } from './utils/config';
+import { AppModule } from './app/app.module';
 
 const MongoDBStore = require('connect-mongodb-session')(session);
 

@@ -1,20 +1,23 @@
-import { Expose, Transform } from 'class-transformer';
-import { IsNotEmpty, IsOptional } from 'class-validator';
-import { ObjectId } from 'mongoose';
+import { IsNotEmpty, IsString } from 'class-validator';
 
-export class AddressDto {
-  @Prop({ required: false })
+export default class AddressDto {
+
+  @IsString()
+  @IsNotEmpty()
   name: string;
 
-  @Prop({ required: true })
+  @IsString()
+  @IsNotEmpty()
   city: string;
 
-  @Prop({ required: true })
+  @IsString()
+  @IsNotEmpty()
   province: string;
 
-  @Prop({ required: true })
+  @IsString()
+  @IsNotEmpty()
   address: string;
-
+  
   @IsNotEmpty()
   postalCode: number
 }

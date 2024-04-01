@@ -98,6 +98,6 @@ export class AuthController {
 
   @Post('/otp')
   otp(@Body() data: OtpDto) {
-
+    return await this.authService.sendOtp()
   }
 }
